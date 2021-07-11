@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 
-app.use((req, res) => {
-  res.status(200).json({
-    message: "Server is working",
-  });
-});
+const productRouter = require("./routes/product");
+const categoryRouter = require("./routes/category");
+
+app.use("/product", productRouter);
+app.use("/category", categoryRouter);
 
 module.exports = app;
