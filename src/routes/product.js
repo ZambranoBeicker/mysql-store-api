@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
   });
 
   //TODO: Create all the logic for the data getting
-});
 
 router.post("/", (req, res) => {
   //testing response
