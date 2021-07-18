@@ -1,13 +1,9 @@
 # MySQL Store API
 
----
-
 This is an practice API using **MySQL** and **Node** with Express. With this API you with be able to get, post, update and delete
 data. In a nutshell, it's a CRUD
 
 # Endpoints
-
---
 
 There are just 2 endpoints: Product and Category
 
