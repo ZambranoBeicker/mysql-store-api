@@ -1,3 +1,5 @@
+const getAllData = (columns, tables) => `SELECT ${columns} FROM ${tables} `;
+
 const getData = (columns, tables, conditions) =>
   `SELECT ${columns} FROM ${tables} WHERE ${conditions}`;
 
@@ -12,6 +14,7 @@ const deleteData = (table, conditions) =>
 
 module.exports = {
   getData,
+  getAllData,
   insertData,
   updateData,
   deleteData,
