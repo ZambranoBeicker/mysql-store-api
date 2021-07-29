@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
 
         res.status(200).json({
           message: "GET to products successfully",
-          log: req.query.search,
           data: rows,
         });
       }
