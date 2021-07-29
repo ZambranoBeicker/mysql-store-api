@@ -6,7 +6,11 @@ const categoryRouter = require("./routes/category");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-//app.use(express.raw());
+
+app.use((req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, Content-Type");
+});
 
 app.use("/product", productRouter);
 app.use("/category", categoryRouter);
