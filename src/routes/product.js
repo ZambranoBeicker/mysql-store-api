@@ -8,10 +8,39 @@ const {
 } = require("../utils/queries");
 const dbConnection = require("../database");
 
+router.get("/query", (req, res) => {
+  //testing response
+
+  //TODO: Create all the logic for the data getting
+
+  res.status(200).json({
+    message: `this is your query: ` + JSON.stringify(req.query.search),
+  });
+});
+
 router.get("/", (req, res) => {
   //testing response
 
   //TODO: Create all the logic for the data getting
+  //
+  if (req.query.search) {
+    dbConnection.query(
+      `SELECT * FROM product WHERE name LIKE '%${req.query.search}%'`,
+      (err, rows, field) => {
+        if (err) {
+          throw err;
+        }
+
+        res.status(200).json({
+          message: "GET to products successfully",
+          log: req.query.search,
+          data: rows,
+        });
+      }
+    );
+
+    return;
+  }
 
   dbConnection.query(getAllData("*", "product"), (err, rows, field) => {
     res.status(200).json({
