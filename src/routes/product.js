@@ -9,9 +9,24 @@ const {
 const dbConnection = require("../database");
 
 router.get("/", (req, res) => {
-  //testing response
+  if (req.query.search) {
+    dbConnection.query(
+      `SELECT * FROM product WHERE name LIKE '%${req.query.search}%'`,
+      (err, rows, field) => {
+        if (err) {
+          throw err;
+        }
 
-  //TODO: Create all the logic for the data getting
+        res.status(200).json({
+          message: "GET to products successfully",
+          log: req.query.search,
+          data: rows,
+        });
+      }
+    );
+
+    return;
+  }
 
   dbConnection.query(getAllData("*", "product"), (err, rows, field) => {
     res.status(200).json({
@@ -22,8 +37,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  //testing response
-  //TODO: Create all the logic for the data posting
   //
   const { name, price, category, discount, url_image } = req.body;
 
@@ -48,9 +61,6 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  //testing response
-  //TODO: Create all the logic for the data putting
-
   const { name, price, category, discount, url_image } = req.body;
 
   dbConnection.query(
@@ -72,13 +82,9 @@ router.put("/:id", (req, res) => {
       }
     }
   );
-  //
 });
 
 router.delete("/:id", (req, res) => {
-  //testing response
-  //TODO: Create all the logic for the data deleting
-
   dbConnection.query(
     deleteData("product", "id =?"),
     [req.params.id],
