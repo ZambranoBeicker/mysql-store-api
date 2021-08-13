@@ -1,83 +1,84 @@
-const express = require("express");
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 const {
   getAllData,
   insertData,
   deleteData,
   updateData,
-} = require("../utils/queries");
-const getConnection = require("../utils/connection");
+} = require('../utils/queries')
+const getConnection = require('../utils/connection')
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
+  console.log('CATEGORY: GETTING ALL')
   getConnection((connection) => {
-    connection.query(getAllData("*", "category"), (err, rows, field) => {
+    connection.query(getAllData('*', 'category'), (err, rows, field) => {
       res.status(200).json({
-        message: "GET to category successfully",
+        message: 'GET to category successfully',
         data: rows,
-      });
-    });
-  });
-});
+      })
+    })
+  })
+})
 
-router.post("/", (req, res) => {
-  const { name } = req.body;
+router.post('/', (req, res) => {
+  const { name } = req.body
 
   getConnection((connection) => {
     connection.query(
-      insertData("name", "category", `?`),
+      insertData('name', 'category', `?`),
       [name],
       (err, rows, field) => {
         if (!err) {
           res.status(200).json({
-            message: "POST to category successfully",
+            message: 'POST to category successfully',
             data: rows,
-          });
+          })
         } else {
-          throw err;
+          throw err
         }
       }
-    );
-  });
-});
+    )
+  })
+})
 
-router.put("/:id", (req, res) => {
-  const { name } = req.body;
+router.put('/:id', (req, res) => {
+  const { name } = req.body
 
   getConnection((connection) => {
     connection.query(
-      updateData("category", "name =? ", "id = ?"),
+      updateData('category', 'name =? ', 'id = ?'),
       [name, req.params.id],
       (err, rows, field) => {
         if (!err) {
           res.status(200).json({
-            message: "PUT to category successfully",
+            message: 'PUT to category successfully',
             data: rows,
-          });
+          })
         } else {
-          throw err;
+          throw err
         }
       }
-    );
-  });
-});
+    )
+  })
+})
 
-router.delete("/:id", (req, res) => {
+router.delete('/:id', (req, res) => {
   getConnection((connection) => {
     connection.query(
-      deleteData("category", "id =?"),
+      deleteData('category', 'id =?'),
       [req.params.id],
       (err, rows, field) => {
         if (!err) {
           res.status(200).json({
-            message: "DELETE to category successfully",
+            message: 'DELETE to category successfully',
             data: rows,
-          });
+          })
         } else {
-          throw err;
+          throw err
         }
       }
-    );
-  });
-});
+    )
+  })
+})
 
-module.exports = router;
+module.exports = router
