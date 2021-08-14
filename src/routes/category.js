@@ -9,9 +9,7 @@ const {
 const getConnection = require('../utils/connection')
 
 router.get('/', (req, res) => {
-  console.log('CATEGORY: GETTING ALL')
   getConnection((connection) => {
-    console.log('CATEGORY: INSIDE GET CONNECTION')
     connection.query(getAllData('*', 'category'), (err, rows, field) => {
       connection.release()
       res.status(200).json({
