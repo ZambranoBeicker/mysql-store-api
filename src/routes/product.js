@@ -12,7 +12,8 @@ router.get('/', (req, res) => {
   if (req.query.search) {
     getConnection((connection) => {
       connection.query(
-        `SELECT * FROM product WHERE name LIKE '%${req.query.search}%'`,
+        `SELECT * FROM product WHERE name LIKE '%?%'`,
+        [req.query.search],
         (err, rows, field) => {
           if (err) {
             throw err
