@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
             throw err
           }
 
+          connection.release()
           res.status(200).json({
             message: 'GET to products successfully',
             data: rows,
