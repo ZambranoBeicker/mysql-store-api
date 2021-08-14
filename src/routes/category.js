@@ -11,7 +11,9 @@ const getConnection = require('../utils/connection')
 router.get('/', (req, res) => {
   console.log('CATEGORY: GETTING ALL')
   getConnection((connection) => {
+    console.log('CATEGORY: INSIDE GET CONNECTION')
     connection.query(getAllData('*', 'category'), (err, rows, field) => {
+      connection.release()
       res.status(200).json({
         message: 'GET to category successfully',
         data: rows,
@@ -29,6 +31,7 @@ router.post('/', (req, res) => {
       [name],
       (err, rows, field) => {
         if (!err) {
+          connection.release()
           res.status(200).json({
             message: 'POST to category successfully',
             data: rows,
@@ -50,6 +53,7 @@ router.put('/:id', (req, res) => {
       [name, req.params.id],
       (err, rows, field) => {
         if (!err) {
+          connection.release()
           res.status(200).json({
             message: 'PUT to category successfully',
             data: rows,
@@ -69,6 +73,7 @@ router.delete('/:id', (req, res) => {
       [req.params.id],
       (err, rows, field) => {
         if (!err) {
+          connection.release()
           res.status(200).json({
             message: 'DELETE to category successfully',
             data: rows,
