@@ -31,6 +31,28 @@ router.get('/', (req, res) => {
     return
   }
 
+  if (req.query.category) {
+    getConnection((connection) => {
+      connection.query(
+        `SELECT * FROM product WHERE category = ?`,
+        [req.query.category],
+        (err, rows, field) => {
+          if (err) {
+            throw err
+          }
+
+          connection.release()
+          res.status(200).json({
+            message: 'GET to products successfully',
+            data: rows,
+          })
+        }
+      )
+    })
+
+    return
+  }
+
   getConnection((connection) => {
     connection.query(getAllData('*', 'product'), (err, rows, field) => {
       connection.release()
