@@ -8,6 +8,12 @@ const {
 } = require('../utils/queries')
 const getConnection = require('../utils/connection')
 
+//Similarly to the product endpoints, here we will
+//use the connection through a pool and release it after
+//every MySQL query
+
+//Manage the get requests. Only get all categories without
+//distinction
 router.get('/', (req, res) => {
   getConnection((connection) => {
     connection.query(getAllData('*', 'category'), (err, rows, field) => {
@@ -20,6 +26,7 @@ router.get('/', (req, res) => {
   })
 })
 
+//Manage post requests
 router.post('/', (req, res) => {
   const { name } = req.body
 
@@ -42,6 +49,7 @@ router.post('/', (req, res) => {
   })
 })
 
+//Manage put requests
 router.put('/:id', (req, res) => {
   const { name } = req.body
 
@@ -64,6 +72,7 @@ router.put('/:id', (req, res) => {
   })
 })
 
+//Manage delete requests
 router.delete('/:id', (req, res) => {
   getConnection((connection) => {
     connection.query(

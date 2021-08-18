@@ -1,3 +1,6 @@
+//These are functions that return MySQL queries to reuse them across
+//the endpoints
+
 const getAllData = (columns, tables) => `SELECT ${columns} FROM ${tables} `
 
 const getData = (columns, tables, conditions) =>
